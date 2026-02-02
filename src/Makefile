@@ -1,14 +1,13 @@
 CFLAGS = -Wall -I/home/josiah/code/learnopengl3/Include/ -L/home/josiah/code/learnopengl3/Libs
 
-
 # Libraries
 LIBS = -l:libglfw3.a -ldl -lm
 
 # Source files
-SRC = test.cpp glad.c
+SRC = helloWindow.cpp glad.c
 
 # Target executable
-TARGET = test
+TARGET = out
 
 # Default rule
 all: $(TARGET)
