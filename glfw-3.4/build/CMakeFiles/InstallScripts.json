@@ -1,9 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/josiah/code/learnopengl3/glfw-3.4/build/cmake_install.cmake",
-		"/home/josiah/code/learnopengl3/glfw-3.4/build/src/cmake_install.cmake",
-		"/home/josiah/code/learnopengl3/glfw-3.4/build/examples/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

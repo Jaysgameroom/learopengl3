@@ -19,7 +19,6 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGl", NULL, NULL);
 
-
 	if (window == NULL){
 		std::cout << "Failed to create Glfw window" << std::endl;
 		glfwTerminate();
@@ -27,6 +26,7 @@ int main() {
 	}
 
 
+	//Grab context and viewport for drawing
 	glfwMakeContextCurrent(window);
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -40,7 +40,7 @@ int main() {
 
 
 
-	
+	//main render loop	
 	while(!glfwWindowShouldClose(window))
 	{
 		processInput(window);

@@ -1,0 +1,6 @@
+CMakeLists.txt
+CMakeFiles
+CMakeCache.txt
+build
+glfw3.a
+libs
