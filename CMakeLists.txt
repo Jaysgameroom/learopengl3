@@ -5,7 +5,7 @@ link_directories("libs")
 include_directories("include")
 
 if(APPLE)
-	link_libraries("-lglfw3" "-framwork Cocoa" "-framework IOKit")
+	link_libraries("-lglfw3" "-framework Cocoa" "-framework IOKit" "-framework OpenGL")
 else()
 link_libraries("-lglfw3" "-lGL")
 endif()
