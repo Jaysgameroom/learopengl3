@@ -88,7 +88,10 @@ class Shader
 		}
 		void setFloat(const std::string &name, float value) const
 		{
-			glUniform1i(glGetUniformLocation(ID, name.c_str()),  value);
+			glUniform1f(glGetUniformLocation(ID, name.c_str()),  value);
+		}
+		void setVec4(const std::string &name, float values[4]){
+			glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, values);
 		}
 
 	private:
@@ -98,7 +101,7 @@ class Shader
 
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 			if(!success){
-				glGetShaderInfoLog(shader, 512, NULL, infolog);
+				glGetShaderInfoLog(shader, 1024, NULL, infolog);
 				std::cout << "ERROR: shader compilation failed\n" << infolog << std::endl;
 			} else {
 				std::cout << "Compilation succesful" << std::endl;
