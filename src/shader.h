@@ -1,6 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include <cstdio>
 #include <glad/glad.h>
 #include <string>
 #include <fstream>
@@ -50,44 +51,41 @@ class Shader
 			int success;
 			char infolog[512];
 
-
 			vertex = glCreateShader(GL_VERTEX_SHADER);
 			glShaderSource(vertex, 1, &c_vertexSource, NULL);	
 			glCompileShader(vertex);
 
-			glGetShaderiv(vertex, GL_LINK_STATUS, &success);
+
+			glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
 			if(!success){
 				glGetShaderInfoLog(vertex, 512, NULL, infolog);
-				std::cout << "ERROR: vetex shader compilation failed\n" << infolog << std::endl;
+				std::cout << "ERROR: vertex shader compilation failed\n" << infolog << std::endl;
 			}
 
 			fragment = glCreateShader(GL_FRAGMENT_SHADER);
 			glShaderSource(fragment, 1, &c_fragmentSource, NULL);	
 			glCompileShader(fragment);
 
-			glGetShaderiv(fragment, GL_LINK_STATUS, &success);
+			glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
 			if(!success){
 				glGetShaderInfoLog(fragment, 512, NULL, infolog);
 				std::cout << "ERROR: fragment shader compilation failed\n" << infolog << std::endl;
 			}
 
 
+			std::cout << "one" << std::endl;
 			ID = glCreateProgram();
 			glAttachShader(ID, vertex);
 			glAttachShader(ID, fragment);
 			glLinkProgram(ID);
 
-			glGetProgramiv(ID, GL_LINK_STATUS, &success);
+			std::cout << "one" << std::endl;
 
-			if(!success)
-			{
-				glGetProgramInfoLog(ID, 512, NULL, infolog);
-				std::cout << "ERROR: shader linking failed\n" << infolog << std::endl;
-			}
+			std::cout << "one" << std::endl;
 
 			glDeleteShader(vertex);
 			glDeleteShader(fragment);
-	
+
 
 		}
 
@@ -107,6 +105,9 @@ class Shader
 		{
 			glUniform1i(glGetUniformLocation(ID, name.c_str()),  value);
 		}
+
+
+
 
 };
 #endif

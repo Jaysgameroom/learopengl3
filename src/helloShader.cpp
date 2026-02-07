@@ -45,26 +45,11 @@ int main() {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	unsigned int vshader, fshader;
-
 	unsigned int VAO;
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
-
-	vshader =  glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vshader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vshader);
 	
-	fshader =  glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fshader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fshader);
-	
-	unsigned int shaderProgram;
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vshader);
-	glAttachShader(shaderProgram, fshader);
-	glLinkProgram(shaderProgram);
-	
+	Shader shader = Shader("shaders/vertex/passthrough.vert", "shaders/fragment/orange.frag");
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
 	glEnableVertexAttribArray(0);
@@ -77,11 +62,9 @@ int main() {
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(shaderProgram);
+		shader.use();
 		glBindVertexArray(VAO);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
-
-
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();    
@@ -89,8 +72,6 @@ int main() {
 	}
 
 	glfwTerminate();
-
-
 	return 0;
 }
 
