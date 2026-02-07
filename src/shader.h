@@ -1,8 +1,10 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include <cstddef>
 #include <cstdio>
 #include <glad/glad.h>
+#include <ostream>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -25,7 +27,7 @@ class Shader
 
 			try	{
 				vShaderFile.open(vertexPath);
-				fShaderFile.open(vertexPath);
+				fShaderFile.open(fragmentPath);
 
 				std::stringstream  vshaderStream, fShaderStream;
 
@@ -49,43 +51,26 @@ class Shader
 
 			unsigned int vertex, fragment;
 			int success;
-			char infolog[512];
 
 			vertex = glCreateShader(GL_VERTEX_SHADER);
 			glShaderSource(vertex, 1, &c_vertexSource, NULL);	
 			glCompileShader(vertex);
-
-
-			glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
-			if(!success){
-				glGetShaderInfoLog(vertex, 512, NULL, infolog);
-				std::cout << "ERROR: vertex shader compilation failed\n" << infolog << std::endl;
-			}
+			checkCompileErrors(vertex);
 
 			fragment = glCreateShader(GL_FRAGMENT_SHADER);
 			glShaderSource(fragment, 1, &c_fragmentSource, NULL);	
 			glCompileShader(fragment);
+			checkCompileErrors(fragment);
 
-			glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
-			if(!success){
-				glGetShaderInfoLog(fragment, 512, NULL, infolog);
-				std::cout << "ERROR: fragment shader compilation failed\n" << infolog << std::endl;
-			}
-
-
-			std::cout << "one" << std::endl;
 			ID = glCreateProgram();
 			glAttachShader(ID, vertex);
 			glAttachShader(ID, fragment);
+			std::cout << "one" << std::endl;
 			glLinkProgram(ID);
-
-			std::cout << "one" << std::endl;
-
-			std::cout << "one" << std::endl;
+			checkLinkErrors(ID);
 
 			glDeleteShader(vertex);
 			glDeleteShader(fragment);
-
 
 		}
 
@@ -106,8 +91,33 @@ class Shader
 			glUniform1i(glGetUniformLocation(ID, name.c_str()),  value);
 		}
 
+	private:
+		int checkCompileErrors(unsigned int shader){
+			int success;
+			char infolog[1024];
 
+			glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+			if(!success){
+				glGetShaderInfoLog(shader, 512, NULL, infolog);
+				std::cout << "ERROR: shader compilation failed\n" << infolog << std::endl;
+			} else {
+				std::cout << "Compilation succesful" << std::endl;
+			}
+			return success;
+		}
 
+		int checkLinkErrors(unsigned int program){
+			int success;
+			char infolog[1024];
+			glGetProgramiv(program, GL_LINK_STATUS, &success);
+			if (!success){
+				glGetProgramInfoLog(program, 1024, NULL, infolog);
+				std::cout << "ERROR: Linking failed\n" << infolog << std::endl;
+			} else{
+				std::cout << "Liking succesful" << std::endl;
+			}
+			return success;
+		}
 
 };
 #endif
