@@ -42,8 +42,8 @@ class Shader
 
 			}
 
-			catch(std::ifstream::failure e) {
-				std::cout << "Shader file not succesfully read" << std::endl;
+			catch(std::ifstream::failure& e) {
+				std::cout << "Shader file not succesfully read" << e.what() << std::endl;
 			}
 
 			const char* c_vertexSource = vertexSource.c_str();
@@ -104,7 +104,7 @@ class Shader
 				glGetShaderInfoLog(shader, 1024, NULL, infolog);
 				std::cout << "ERROR: shader compilation failed\n" << infolog << std::endl;
 			} else {
-				std::cout << "Compilation succesful" << std::endl;
+				std::cout << "Compilation succesful!" << std::endl;
 			}
 			return success;
 		}
@@ -117,7 +117,7 @@ class Shader
 				glGetProgramInfoLog(program, 1024, NULL, infolog);
 				std::cout << "ERROR: Linking failed\n" << infolog << std::endl;
 			} else{
-				std::cout << "Liking succesful" << std::endl;
+				std::cout << "Linking succesful!" << std::endl;
 			}
 			return success;
 		}

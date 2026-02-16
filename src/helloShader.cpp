@@ -54,6 +54,8 @@ int main() {
 	Shader shader = Shader("shaders/vertex/move.vert", "shaders/fragment/uniformcolor.frag");
 
 
+
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
 	glEnableVertexAttribArray(0);
 

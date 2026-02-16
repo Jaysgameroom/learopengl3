@@ -1,5 +1,5 @@
 link_directories("${CMAKE_SOURCE_DIR}/libs")
-include_directories("${CMAKE_SOURCE_DIR}/include" "src")
+include_directories("${CMAKE_SOURCE_DIR}/deps")
 
 if(APPLE)
 link_libraries("-lglfw3" "-framework Cocoa" "-framework IOKit" "-framework OpenGL")
@@ -13,7 +13,8 @@ set(GLAD "${CMAKE_SOURCE_DIR}/deps/glad/glad.c")
 add_executable(hello_window helloWindow.cpp ${GLAD})
 add_executable(hello_triangle helloTriangle.cpp ${GLAD})
 add_executable(hello_shader helloShader.cpp ${GLAD})
-add_executable(hello_texture helloTexture.cpp ${GLAD})
+add_executable(hello_texture helloTexture.cpp stb_image.cpp ${GLAD})
+add_executable(hello_transformation helloTransformation.cpp stb_image.cpp ${GLAD})
 
 
 add_custom_target(copy_shaders ALL
@@ -23,6 +24,12 @@ add_custom_target(copy_shaders ALL
 	COMMENT "IS THIS WORKING"
 )
 
+add_custom_target(copy_assets ALL
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+	${CMAKE_CURRENT_SOURCE_DIR}/assets/
+	${CMAKE_CURRENT_BINARY_DIR}/assets/
+	COMMENT "IS THIS WORKING"
+)
 
 
 
