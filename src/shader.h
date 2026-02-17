@@ -65,7 +65,6 @@ class Shader
 			ID = glCreateProgram();
 			glAttachShader(ID, vertex);
 			glAttachShader(ID, fragment);
-			std::cout << "one" << std::endl;
 			glLinkProgram(ID);
 			checkLinkErrors(ID);
 

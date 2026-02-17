@@ -4,3 +4,4 @@ build
 glfw3.a
 libs
 include/GLFW
+.cache

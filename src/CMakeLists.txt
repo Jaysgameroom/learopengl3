@@ -21,14 +21,14 @@ add_custom_target(copy_shaders ALL
 	COMMAND ${CMAKE_COMMAND} -E copy_directory
 	${CMAKE_CURRENT_SOURCE_DIR}/shaders/
 	${CMAKE_CURRENT_BINARY_DIR}/shaders/
-	COMMENT "IS THIS WORKING"
+	COMMENT "Shaders copied"
 )
 
 add_custom_target(copy_assets ALL
 	COMMAND ${CMAKE_COMMAND} -E copy_directory
 	${CMAKE_CURRENT_SOURCE_DIR}/assets/
 	${CMAKE_CURRENT_BINARY_DIR}/assets/
-	COMMENT "IS THIS WORKING"
+	COMMENT "Assetsc copied"
 )
 
 
