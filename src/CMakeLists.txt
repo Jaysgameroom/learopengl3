@@ -10,11 +10,12 @@ endif()
 
 set(GLAD "${CMAKE_SOURCE_DIR}/deps/glad/glad.c")
 
-add_executable(hello_window helloWindow.cpp ${GLAD})
-add_executable(hello_triangle helloTriangle.cpp ${GLAD})
-add_executable(hello_shader helloShader.cpp ${GLAD})
-add_executable(hello_texture helloTexture.cpp stb_image.cpp ${GLAD})
-add_executable(hello_transformation helloTransformation.cpp stb_image.cpp ${GLAD})
+add_executable(window helloWindow.cpp ${GLAD})
+add_executable(triangle helloTriangle.cpp ${GLAD})
+add_executable(shader helloShader.cpp ${GLAD})
+add_executable(texture helloTexture.cpp stb_image.cpp ${GLAD})
+add_executable(transformation helloTransformation.cpp stb_image.cpp ${GLAD})
+add_executable(space helloSpace.cpp stb_image.cpp ${GLAD})
 
 
 add_custom_target(copy_shaders ALL
