@@ -131,10 +131,13 @@ int main(){
 	
 	Shader shader("shaders/vertex/3d.vert", "shaders/fragment/texture.frag");
 
+
+	glEnable(GL_DEPTH_TEST);
+
 	while(!glfwWindowShouldClose(window)){
 		processInput(window);
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glBindVertexArray(VAO);
 		shader.use();
@@ -142,7 +145,7 @@ int main(){
 		float time = (float)glfwGetTime();
 
 		glm::mat4 model(1.0f);
-		model = glm::rotate(model, glm::radians(time * 20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(time * 20.0f), glm::vec3(0.0f, 1.0f, 1.0f));
 
 		glm::mat4 view(1.0f);
 		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
