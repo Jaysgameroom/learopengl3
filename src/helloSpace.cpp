@@ -15,7 +15,7 @@ const int windowHeight = 600;
 void framebuffer_size_callback(GLFWwindow* winodw, int width, int height);
 void processInput(GLFWwindow* window);
 
-float vertices[] = {
+const float vertices[] = {
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
      0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
      0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
