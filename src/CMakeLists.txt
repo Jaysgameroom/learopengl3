@@ -16,6 +16,7 @@ add_executable(shader helloShader.cpp ${GLAD})
 add_executable(texture helloTexture.cpp stb_image.cpp ${GLAD})
 add_executable(transformation helloTransformation.cpp stb_image.cpp ${GLAD})
 add_executable(space helloSpace.cpp stb_image.cpp ${GLAD})
+add_executable(camera helloCamera.cpp stb_image.cpp ${GLAD})
 
 
 add_custom_target(copy_shaders ALL

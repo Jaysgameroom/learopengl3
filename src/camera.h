@@ -11,38 +11,46 @@ class Camera{
 
 public:
 
-	glm::vec3 position;
-	glm::vec3 worldUp;
-
-	glm::vec3 front;
-	glm::vec3 right;
-	glm::vec3 up;
-
 	float yaw;
 	float pitch;
 
+	void updateVecs(){
+		front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+		front.y = sin(glm::radians(pitch));
+		front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
-	//goal
-	glm::mat4 getViewMatrix(){
-		return 	glm::lookAt(position, position + front, up);
+		front = glm::normalize(front);
+		right = glm::normalize(glm::cross(front, worldUp));
+		up = glm::normalize(glm::cross(right, front));
+
+	}
+
+	void setPosition(glm::vec3 position, float yaw, float pitch){
+		this->position  = position;
+		this->yaw = yaw;
+		this->pitch = pitch;
+		updateVecs();
+
+	}
+
+	Camera(glm::vec3 position, float yaw, float pitch){
+		setPosition(position, yaw, pitch);
+		updateVecs();
 	};
+
+
+	glm::mat4 getViewMatrix(){
+		return glm::lookAt(position, position + front, up);
+	}
 
 private:
 
-	void updateVectors(){
-		glm::vec3 nextFront;
-        nextFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-        nextFront.y = sin(glm::radians(pitch));
-        nextFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-		front = glm::normalize(nextFront);
-		
-		right = glm::normalize(glm::cross(front, worldUp)); 
-		up    = glm::normalize(glm::cross(right, front));
+	const glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-	};
-
-
-
+	glm::vec3 position;
+	glm::vec3 front;
+	glm::vec3 right;
+	glm::vec3 up;
 
 };
 #endif
